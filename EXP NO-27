@@ -1,0 +1,11 @@
+n=3233
+e=17
+
+text="HELLO"
+
+cipher=[pow(ord(ch)-65,e,n) for ch in text]
+
+print("Cipher:",cipher)
+
+# Same plaintext always gives same ciphertext
+print("H encrypted again:",pow(7,e,n))
