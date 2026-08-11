@@ -1,0 +1,28 @@
+def xor(a,b): return ''.join(str(int(x)^int(y)) for x,y in zip(a,b))
+
+def sdes(x,k):
+    return xor(x,k[:8])                 # simplified educational cipher
+
+def cbc_encrypt(pt,key,iv):
+    out=""
+    for i in range(0,len(pt),8):
+        b=xor(pt[i:i+8],iv)
+        c=sdes(b,key)
+        out+=c; iv=c
+    return out
+
+def cbc_decrypt(ct,key,iv):
+    out=""
+    for i in range(0,len(ct),8):
+        c=ct[i:i+8]
+        out+=xor(sdes(c,key),iv)
+        iv=c
+    return out
+
+pt="0000000100100011"
+key="0111111101"
+iv="10101010"
+
+c=cbc_encrypt(pt,key,iv)
+print("Cipher:",c)
+print("Plain :",cbc_decrypt(c,key,iv))
