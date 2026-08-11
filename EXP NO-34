@@ -1,0 +1,15 @@
+def pad(data,bs=8):
+    n=bs-len(data)%bs
+    return data+bytes([n])*n
+
+def xor(a,b):
+    return bytes(x^y for x,y in zip(a,b))
+
+def ecb(data,key):
+    return b''.join(xor(data[i:i+8],key)
+                    for i in range(0,len(data),8))
+
+data=pad(b"HELLO")
+key=b"12345678"
+
+print(ecb(data,key))
