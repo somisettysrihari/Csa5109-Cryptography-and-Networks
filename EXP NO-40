@@ -1,0 +1,18 @@
+from collections import Counter
+
+english="ETAOINSHRDLCUMWFGYPBVKJXQZ"
+
+def frequency_attack(text,n=10):
+    count=Counter(c for c in text.upper() if c.isalpha())
+    cipher=''.join(x for x,_ in count.most_common())
+
+    results=[]
+    for shift in range(min(n,26)):
+        mp=dict(zip(cipher,english[shift:]+english[:shift]))
+        results.append(
+            ''.join(mp.get(c,c) for c in text.upper())
+        )
+    return results
+
+for i,x in enumerate(frequency_attack("WKLV LV D WHVW",10),1):
+    print(i,x)
