@@ -1,0 +1,11 @@
+rate=1024
+capacity=576
+lane_size=64
+
+rate_lanes=rate//lane_size
+cap_lanes=capacity//lane_size
+
+print("Rate lanes:",rate_lanes)
+print("Capacity lanes:",cap_lanes)
+print("Capacity lanes initially nonzero:",0)
+print("After absorbing P0:",cap_lanes)
