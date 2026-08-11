@@ -1,0 +1,14 @@
+from collections import Counter
+
+text="KHOOR ZRUOG"
+
+freq=Counter(c for c in text if c.isalpha()).most_common(1)[0][0]
+
+shift=(ord(freq)-ord('E'))%26
+
+plain=''.join(
+    chr((ord(c)-65-shift)%26+65) if c.isalpha() else c
+    for c in text
+)
+
+print("Possible plaintext:",plain)
