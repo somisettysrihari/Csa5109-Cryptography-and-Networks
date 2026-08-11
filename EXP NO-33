@@ -1,0 +1,19 @@
+def xor(a,b):
+    return ''.join(str(int(x)^int(y)) for x,y in zip(a,b))
+
+def f(r,k):
+    return xor(r,k)
+
+def des(block,key):
+    L,R=block[:32],block[32:]
+    for i in range(16):
+        L,R=R,xor(L,f(R,key))
+    return R+L
+
+pt="0123456789ABCDEF"
+key="1010101010101010101010101010101010101010101010101010101010101010"
+
+# Binary block expected
+block=''.join(format(int(x,16),'04b') for x in pt)
+
+print("Encrypted:",des(block,key[:32]))
