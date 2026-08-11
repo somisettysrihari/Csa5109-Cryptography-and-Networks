@@ -1,0 +1,32 @@
+# Frequency Attack on Monoalphabetic Substitution Cipher
+
+from collections import Counter
+
+freq = "ETAOINSHRDLCUMWFGYPBVKJXQZ"
+
+cipher = input("Enter ciphertext: ")
+n = int(input("Enter number of possible plaintexts: "))
+
+count = Counter(c for c in cipher.upper() if c.isalpha())
+common = [x[0] for x in count.most_common()]
+
+results = []
+
+for shift in range(26):
+    key = {}
+    for i, c in enumerate(common):
+        key[c] = freq[(i + shift) % 26]
+
+    plain = ""
+    for c in cipher.upper():
+        plain += key.get(c, c)
+
+    score = sum(plain.count(x) * (26 - i)
+                for i, x in enumerate(freq))
+    results.append((score, plain))
+
+results.sort(reverse=True)
+
+print("\nTop", n, "Possible Plaintexts:")
+for i, (score, text) in enumerate(results[:n], 1):
+    print(i, ":", text)
