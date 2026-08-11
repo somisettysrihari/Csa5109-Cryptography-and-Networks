@@ -1,0 +1,16 @@
+q=23
+a=5
+
+xa=6
+xb=15
+
+A=pow(a,xa,q)
+B=pow(a,xb,q)
+
+KA=pow(B,xa,q)
+KB=pow(A,xb,q)
+
+print("Alice sends:",A)
+print("Bob sends:",B)
+print("Alice key:",KA)
+print("Bob key:",KB)
