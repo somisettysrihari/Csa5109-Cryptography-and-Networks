@@ -1,0 +1,13 @@
+from math import gcd
+
+n=55
+e=3
+m=15
+
+g=gcd(m,n)
+
+if g>1:
+    print("Common factor found:",g)
+    print("RSA modulus can be factored!")
+else:
+    print("No useful factor found")
