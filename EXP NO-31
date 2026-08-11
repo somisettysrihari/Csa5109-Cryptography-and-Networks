@@ -1,0 +1,19 @@
+def leftshift(x,bits=128):
+    return ((x<<1)&((1<<bits)-1))
+
+def cmac_subkeys(L):
+    Rb=0x87
+    K1=leftshift(L)
+    if L & (1<<127):
+        K1 ^= Rb
+    K2=leftshift(K1)
+    if K1 & (1<<127):
+        K2 ^= Rb
+    return K1,K2
+
+L=0x1234567890ABCDEF1234567890ABCDEF
+
+K1,K2=cmac_subkeys(L)
+
+print(hex(K1))
+print(hex(K2))
