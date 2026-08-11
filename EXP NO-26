@@ -1,0 +1,17 @@
+import math
+
+p,q=61,53
+n=p*q
+phi=(p-1)*(q-1)
+
+e=17
+d=pow(e,-1,phi)
+
+print("Old public key:",e,n)
+print("Old private key:",d)
+
+new_e=7
+new_d=pow(new_e,-1,phi)
+
+print("New public key:",new_e,n)
+print("New private key:",new_d)
