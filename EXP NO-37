@@ -1,0 +1,12 @@
+from collections import Counter
+
+freq="ETAOINSHRDLCUMWFGYPBVKJXQZ"
+
+def attack(text):
+    c=Counter(c for c in text.upper() if c.isalpha())
+    order=[x for x,_ in c.most_common()]
+    mp=dict(zip(order,freq))
+
+    return ''.join(mp.get(c,c) for c in text.upper())
+
+print(attack("WKLV LV D WHVW"))
