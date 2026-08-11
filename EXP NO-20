@@ -1,0 +1,25 @@
+# CBC Mode Error Propagation Demonstration
+
+# CBC error propagation rules:
+# a) If C1 has a transmission error:
+#    P1 is completely corrupted.
+#    P2 has only the corresponding bit error.
+#    P3 and later blocks are NOT affected.
+#
+# b) If P1 has a bit error before encryption:
+#    The error propagates through ALL ciphertext blocks
+#    because C1 changes, which changes C2, C3, ... .
+#    At the receiver, P1 and all subsequent plaintext blocks
+#    are corrupted.
+
+print("CBC Mode Error Propagation")
+print("--------------------------")
+
+print("a) Error in transmitted C1:")
+print("   P1 -> Completely corrupted")
+print("   P2 -> Corresponding bit is flipped")
+print("   P3 onwards -> Not affected")
+
+print("\nb) Bit error in source P1:")
+print("   Error propagates through all ciphertext blocks.")
+print("   At receiver: P1 and all subsequent plaintext blocks are corrupted.")
