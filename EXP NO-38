@@ -1,0 +1,12 @@
+import numpy as np
+
+P=np.array([[7,4],[4,11]])
+C=np.array([[19,7],[13,8]])
+
+det=round(np.linalg.det(P))
+inv=np.linalg.inv(P)*det
+
+K=(C@np.linalg.inv(P))%26
+
+print("Recovered key:")
+print(np.round(K)%26)
