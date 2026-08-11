@@ -1,0 +1,7 @@
+def affine(text,a,b):
+    return ''.join(
+        chr((a*(ord(c)-65)+b)%26+65)
+        for c in text
+    )
+
+print(affine("HELLO",5,8))
