@@ -1,0 +1,33 @@
+# DES Decryption Key Generation
+# DES decryption uses the 16 round keys in reverse order
+
+key = "133457799BBCDFF1"
+
+# DES left shift schedule
+shifts = [1, 1, 2, 2, 2, 2, 2, 2,
+          1, 2, 2, 2, 2, 2, 2, 1]
+
+# Generate encryption round keys
+def generate_keys(key):
+    keys = []
+
+    # Example placeholder for 16 DES round keys
+    # In actual DES, PC-1, left/right shifts and PC-2 are applied here
+    for i in range(16):
+        keys.append(key + f"_K{i+1}")
+
+    return keys
+
+# Generate keys
+encryption_keys = generate_keys(key)
+
+# Reverse keys for decryption
+decryption_keys = encryption_keys[::-1]
+
+print("Encryption Keys:")
+for i, k in enumerate(encryption_keys, 1):
+    print("K" + str(i), "=", k)
+
+print("\nDecryption Keys (Reverse Order):")
+for i, k in enumerate(decryption_keys, 1):
+    print("K" + str(i), "=", k)
