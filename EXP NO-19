@@ -1,0 +1,26 @@
+# CBC Mode Encryption using AES (Stronger than DES)
+
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+
+# 16-byte AES key and IV
+key = get_random_bytes(16)
+iv = get_random_bytes(16)
+
+message = b"HELLO THIS IS CBC"
+
+# Padding
+pad = 16 - len(message) % 16
+message += bytes([pad]) * pad
+
+# AES-CBC Encryption
+cipher = AES.new(key, AES.MODE_CBC, iv)
+ciphertext = cipher.encrypt(message)
+
+print("Key       :", key.hex())
+print("IV        :", iv.hex())
+print("Ciphertext:", ciphertext.hex())
+
+# Choices:
+# a) Security   -> AES (stronger and more secure)
+# b) Performance -> AES (faster and more efficient)
