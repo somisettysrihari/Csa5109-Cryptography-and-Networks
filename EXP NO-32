@@ -1,0 +1,10 @@
+import hashlib
+
+def sign(message,k):
+    h=int(hashlib.sha256(message.encode()).hexdigest(),16)
+    r=(k*7)%101
+    s=(pow(k,-1,101)*(h+r*13))%101
+    return r,s
+
+print("Signature 1:",sign("HELLO",17))
+print("Signature 2:",sign("HELLO",29))
