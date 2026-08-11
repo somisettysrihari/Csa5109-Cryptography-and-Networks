@@ -1,0 +1,18 @@
+def xor(a,b):
+    return ''.join(str(int(x)^int(y)) for x,y in zip(a,b))
+
+def ctr(pt,key,counter):
+    out=""
+    for i in range(0,len(pt),8):
+        stream=xor(counter,key[:8])
+        out+=xor(pt[i:i+8],stream)
+        counter=format(int(counter,2)+1,'08b')
+    return out
+
+pt="000000010000001000000100"
+key="0111111101"
+counter="00000000"
+
+c=ctr(pt,key,counter)
+print("Cipher:",c)
+print("Plain :",ctr(c,key,counter))
