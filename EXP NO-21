@@ -1,0 +1,36 @@
+BS = 8
+
+def pad(s):
+    p = BS - len(s) % BS
+    return s + chr(p) * p
+
+def xor(a, b):
+    return bytes(x ^ y for x, y in zip(a, b))
+
+def ecb(data, key):
+    return b''.join(xor(data[i:i+BS], key) for i in range(0, len(data), BS))
+
+def cbc(data, key, iv):
+    out, prev = b'', iv
+    for i in range(0, len(data), BS):
+        prev = xor(data[i:i+BS], prev)
+        prev = xor(prev, key)
+        out += prev
+    return out
+
+def cfb(data, key, iv):
+    out, prev = b'', iv
+    for i in range(0, len(data), BS):
+        stream = xor(prev, key)
+        c = xor(data[i:i+BS], stream)
+        out += c
+        prev = c
+    return out
+
+msg = pad(b"HELLO")
+key = b"12345678"
+iv = b"abcdefgh"
+
+print("ECB:", ecb(msg, key))
+print("CBC:", cbc(msg, key, iv))
+print("CFB:", cfb(msg, key, iv))
